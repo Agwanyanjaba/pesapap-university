@@ -1,14 +1,18 @@
 package com.pesapauniversity.models;
 
-import org.springframework.stereotype.Component;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Component
+@Entity
+@Table(name = "students")
 public class Student {
     private Long studentId;
     private String firstName;
     private String lastName;
     private String email;
 
+    @Id
     public Long getStudentId() {
         return studentId;
     }
@@ -33,4 +37,5 @@ public class Student {
     public void setEmail(String email) {
         this.email = email;
     }
+
 }

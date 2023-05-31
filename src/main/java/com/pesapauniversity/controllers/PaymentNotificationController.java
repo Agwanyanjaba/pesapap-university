@@ -14,12 +14,12 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/v1/student")
-public class StudentValidationController {
+public class StudentNotificationController {
     private TransactionResponse transactionResponse;
     private StudentValidationService studentValidationService;
 
     @Autowired
-    public StudentValidationController(TransactionResponse transactionResponse, StudentValidationService studentValidationService){
+    public StudentNotificationController(TransactionResponse transactionResponse, StudentValidationService studentValidationService){
         this.studentValidationService = studentValidationService;
         this.transactionResponse = transactionResponse;
     }
