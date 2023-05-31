@@ -1,2 +1,4 @@
-package com.pesapauniversity.utils;public class PrefixIdGenerator {
+package com.pesapauniversity.utils;
+
+public class PrefixIdGenerator {
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Component
 @Entity
 @Table(name = "payment")
-public class Payment {
+public class FeePayment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Payment {
     // Constructors, getters, and setters
 
     // Constructor with all fields
-    public Payment(Long studentId, BigDecimal amount, String paymentMethod, String bankChannel, LocalDateTime paymentDate) {
+    public FeePayment(Long studentId, BigDecimal amount, String paymentMethod, String bankChannel, LocalDateTime paymentDate) {
         this.studentId = studentId;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
@@ -43,7 +43,7 @@ public class Payment {
     }
 
     // Default constructor (required by JPA)
-    public Payment() {
+    public FeePayment() {
     }
 
     // Getters and setters
