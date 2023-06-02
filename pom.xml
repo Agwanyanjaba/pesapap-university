@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.pesapapuniversity</groupId>
-	<artifactId>pesapauniversity</artifactId>
+	<artifactId>fee-notification-microservice</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>pesapauniversity</name>
 	<description>Pesapap University Microservice</description>
