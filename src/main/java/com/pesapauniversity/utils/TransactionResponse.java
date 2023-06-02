@@ -7,10 +7,10 @@ import java.util.LinkedHashMap;
 
 @Component
 public class TransactionResponse {
-    public HashMap<String,Object> genericResponse(Object value, Object value1){
+    public HashMap<String,Object> genericResponse(Object header, Object body){
         HashMap<String,Object> map = new LinkedHashMap<>();
-        map.put("ResponseHeader", value);
-        map.put("ResponseBody", value1);
+        map.put("ResponseHeader", header);
+        map.put("ResponseBody", body);
 
         return map;
     }

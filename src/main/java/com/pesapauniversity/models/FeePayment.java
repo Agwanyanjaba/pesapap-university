@@ -9,12 +9,11 @@ import java.time.LocalDateTime;
 
 @Component
 @Entity
-@Table(name = "payment")
+@Table(name = "payments")
 public class FeePayment {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "payment_id")
+    private String paymentId;
 
     @Column(name = "student_id")
     private Long studentId;
@@ -22,25 +21,15 @@ public class FeePayment {
     @Column(name = "amount")
     private BigDecimal amount;
 
-    @Column(name = "payment_method")
-    private String paymentMethod;
+    @Column(name = "payment_channel")
+    private String paymentChannel;
 
-    @Column(name = "bank_channel")
-    private String bankChannel;
+    @Column(name = "payment_description")
+    private String paymentDescription;
 
-    @Column(name = "payment_date")
+    @Column(name = "payment_date", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime paymentDate;
 
-    // Constructors, getters, and setters
-
-    // Constructor with all fields
-    public FeePayment(Long studentId, BigDecimal amount, String paymentMethod, String bankChannel, LocalDateTime paymentDate) {
-        this.studentId = studentId;
-        this.amount = amount;
-        this.paymentMethod = paymentMethod;
-        this.bankChannel = bankChannel;
-        this.paymentDate = paymentDate;
-    }
 
     // Default constructor (required by JPA)
     public FeePayment() {
@@ -48,12 +37,13 @@ public class FeePayment {
 
     // Getters and setters
 
-    public Long getId() {
-        return id;
+    @Id
+    public String getPaymentId() {
+        return paymentId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setPaymentId(String paymentId) {
+        this.paymentId = paymentId;
     }
 
     public Long getStudentId() {
@@ -72,20 +62,20 @@ public class FeePayment {
         this.amount = amount;
     }
 
-    public String getPaymentMethod() {
-        return paymentMethod;
+    public String getPaymentChannel() {
+        return paymentChannel;
     }
 
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
+    public void setPaymentChannel(String paymentChannel) {
+        this.paymentChannel = paymentChannel;
     }
 
-    public String getBankChannel() {
-        return bankChannel;
+    public String getPaymentDescription() {
+        return paymentDescription;
     }
 
-    public void setBankChannel(String bankChannel) {
-        this.bankChannel = bankChannel;
+    public void setPaymentDescription(String paymentDescription) {
+        this.paymentDescription = paymentDescription;
     }
 
     public LocalDateTime getPaymentDate() {
@@ -94,6 +84,18 @@ public class FeePayment {
 
     public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    @Override
+    public String toString() {
+        return "FeePayment Details{" +
+                "paymentId=" + paymentId +
+                ", studentId=" + studentId +
+                ", amount=" + amount +
+                ", paymentChannel='" + paymentChannel + '\'' +
+                ", paymentDescription='" + paymentDescription + '\'' +
+                ", paymentDate=" + paymentDate +
+                '}';
     }
 }
 

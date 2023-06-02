@@ -6,12 +6,14 @@ CREATE TABLE students
     email VARCHAR(100)
 );
 
-CREATE TABLE FeePayments
+CREATE TABLE payments
 (
-    id           BIGINT PRIMARY KEY,
+    payment_id   VARCHAR(250) PRIMARY KEY,
     student_id   BIGINT,
     amount       DECIMAL(10, 2),
-    payment_date TIMESTAMP,
+    payment_channel VARCHAR(100),
+    payment_description VARCHAR(250),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (student_id) REFERENCES students (student_id)
 );
 
@@ -20,7 +22,8 @@ INSERT INTO students (student_id, first_name, last_name, email)
 VALUES (1, 'John', 'Doe', 'john.doe@example.com'),
        (2, 'Jane', 'Smith', 'jane.smith@example.com');
 
-INSERT INTO FeePayments (id, student_id, amount, payment_date)
-VALUES (1, 1, 1000.00, '2022-01-05 10:00:00'),
-       (2, 2, 1500.00, '2022-02-10 15:30:00'),
-       (3, 1, 2000.00, '2022-03-15 12:45:00');
+INSERT INTO payments (payment_id, student_id, amount, payment_channel, payment_description, payment_date)
+VALUES ('9a1a9e2c-ffc3-11ed-be56-0242ac120001', 1, 1000.00,'mobile','Fee Payment',CURRENT_TIMESTAMP),
+       ('9a1a9e2c-ffc3-11ed-be56-0242ac120002', 2, 1500.00, 'mobile','Fee Payment',CURRENT_TIMESTAMP),
+       ('9a1a9e2c-ffc3-11ed-be56-0242ac120003', 1, 2000.00, 'mobile','Fee Payment', CURRENT_TIMESTAMP),
+       ('9a1a9e2c-ffc3-11ed-be56-0242ac120004', 2, 2000.00, 'mobile','Fee Payment', CURRENT_TIMESTAMP);

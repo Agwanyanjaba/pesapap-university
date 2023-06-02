@@ -27,19 +27,17 @@ public class StudentService {
         this.feePaymentRepository = feePaymentRepository;
     }
 
-    public List<Student> getAllPayments() {
-        return validationRepository.findAll();
-    }
-
     public Student getStudentById(Long studentId) {
         Optional<Student> student = validationRepository.findById(studentId);
-        Student studentResponse = student.get();
-        if(student.isEmpty()){
+        if(student.isPresent()){
+            Student studentResponse = student.get();
+            LOGGER.info("===VALIDATION REQUEST for :: {}",studentResponse.getStudentId(),"received");
+            return studentResponse;
+        }
+        else {
             LOGGER.warn("===[Student details not found");
             return null;
         }
-        LOGGER.info("==="+studentResponse.getStudentId());
-        return studentResponse;
     }
 
     public HashMap<Object, Object> submitPayment(FeePayment feePayment) {
@@ -47,17 +45,19 @@ public class StudentService {
         try {
             FeePayment savedPayment = feePaymentRepository.save(feePayment);
             //Save operation was successful
-
+            Student payingStudent = getStudentById(feePayment.getStudentId());
             HashMap<Object, Object> paymentResponse = new LinkedHashMap<>();
-            paymentResponse.put("paymentId", savedPayment.getId());
+            paymentResponse.put("paymentId", savedPayment.getPaymentId());
             paymentResponse.put("studentId",savedPayment.getStudentId());
+            paymentResponse.put("studentName", payingStudent.getFirstName()+" "+payingStudent.getLastName());
             paymentResponse.put("amountPaid", savedPayment.getAmount());
-            paymentResponse.put("paymentDate", savedPayment.getPaymentDate());
+            paymentResponse.put("paymentDescription", savedPayment.getPaymentDescription());
+
             return paymentResponse;
 
         } catch (DataIntegrityViolationException e) {
             // Save operation failed due to constraints or validation errors
-            LOGGER.error("===["+e.getMessage());
+            LOGGER.error("===[ERROR on payment submission"+e.getMessage());
             return null;
         }
 
